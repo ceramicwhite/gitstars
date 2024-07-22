@@ -4,7 +4,7 @@
       <svg-icon name="search" class="absolute left-2 top-2 text-gray-400" />
 
       <input
-        placeholder="开发者 | 仓库名 | 描述"
+        placeholder="Developer | Repository Name | Description"
         ref="refInput"
         type="text"
         class="h-7 w-full flex-auto rounded-full bg-white px-6 outline-none"
@@ -38,7 +38,7 @@
         repositoryStore.all.length !== 0 &&
         repositoryStore.loading
       "
-      aria-label="仓库更新中"
+      aria-label="Repositories updating"
       role="tooltip"
       data-microtip-position="top"
       class="ml-2.5 text-sm"

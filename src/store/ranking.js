@@ -7,19 +7,19 @@ import {
 export const useRankingStore = defineStore('ranking', {
   state: () => ({
     /**
-     * 语言 tag 列表
+     * Language tag list
      */
     languageList: [],
     /**
-     * 语言 tag: 仓库列表
+     * Language tag: Repository list
      */
     languageMap: {},
     /**
-     * 当前选中的语言 tag
+     * Currently selected language tag
      */
     selectedLanguage: '',
     /**
-     * 语言 tag 过滤
+     * Language tag filter
      */
     filterText: '',
   }),
@@ -36,13 +36,13 @@ export const useRankingStore = defineStore('ranking', {
 
   actions: {
     /**
-     * 获取语言列表
+     * Fetch language list
      */
     async resolveLanguageList() {
       this.languageList = await getGithubRankingLanguageList();
     },
     /**
-     * 获取语言: 仓库列表
+     * Fetch language: Repository list
      */
     async resolveLanguageMap() {
       this.languageMap = await getGithubRankingLanguageMap();

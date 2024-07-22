@@ -16,22 +16,22 @@ export const TAG_TYPE = {
 export const REPO_SORT_TYPE = {
   time: {
     value: 'time',
-    label: '按时间排序',
+    label: 'Sort by time',
   },
   star: {
     value: 'star',
-    label: '按 Star 数量排序',
+    label: 'Sort by star count',
   },
 };
 export const TAG_SORT_TYPE = {
   amountDown: {
     icon: 'sort-amount-down',
-    label: '降序排序',
+    label: 'Sort in descending order',
     value: 'amountDown',
   },
   amountUp: {
     icon: 'sort-amount-up',
-    label: '升序排序',
+    label: 'Sort in ascending order',
     value: 'amountUp',
   },
 };

@@ -3,7 +3,7 @@ import { TAG_TYPE, TAG_SORT_TYPE, TAG_SRC } from '@/constants';
 import { useRepositoryStore } from './repository';
 
 /**
- * 统计分析 Topics 获取所有 topic 及其对应的 repositories
+ * Analyze topics to get all topics and their corresponding repositories
  */
 function analyzeTopics() {
   const topicMap = {};
@@ -22,7 +22,7 @@ function analyzeTopics() {
 }
 
 /**
- * 统计分析 Languages 获取所有 language 及其对应的 repositories
+ * Analyze languages to get all languages and their corresponding repositories
  */
 function analyzeLanguages() {
   const languageMap = {};
@@ -43,33 +43,33 @@ function analyzeLanguages() {
 export const useTagStore = defineStore('tag', {
   state: () => ({
     /**
-     * tag 来源
-     *  1. 自己 star 的仓库
-     *  2. Github 排行榜
+     * Tag source
+     *  1. Starred repositories
+     *  2. Github rankings
      */
     tagSrc: TAG_SRC.self,
     /**
-     * 当前选中 tag
-     * topic 或 language
+     * Currently selected tag
+     * either topic or language
      */
     selectedTag: '',
     /**
-     * 当前选中 tag 类型
-     * topic 和 language 的 tag 名可能相同
-     * 需要此标识判断当前选中的 tag 是属于什么类型
+     * Currently selected tag type
+     * topic and language tags may have the same name
+     * this flag is used to determine the type of the selected tag
      */
     selectedTagType: '',
     /**
-     * 当前选中 tag 类别
-     * 用于 sidebar 底部 Topics 和 Languages 的高亮状态
+     * Currently selected tag category
+     * used for highlighting Topics and Languages in the sidebar
      */
     selectedTagTypeNav: TAG_TYPE.topic,
     /**
-     * tag 搜索内容
+     * Tag search content
      */
     filterText: '',
     /**
-     * tag 排序
+     * Tag sorting
      */
     sortType: TAG_SORT_TYPE.amountDown.value,
     /**
@@ -84,7 +84,7 @@ export const useTagStore = defineStore('tag', {
 
   actions: {
     /**
-     * 统计分析 topics 和 languages
+     * Analyze topics and languages
      */
     analyze() {
       this.topicMap = analyzeTopics();

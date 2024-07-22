@@ -2,7 +2,7 @@
   <div class="relative flex h-0 flex-auto flex-col">
     <TagItem
       :tag="{
-        label: '全部',
+        label: 'All',
         icon: 'all-application',
         count: repositoryStore.all.length,
       }"

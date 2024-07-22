@@ -5,11 +5,11 @@ import { useTagStore } from '@/store/tag';
 import { useRankingStore } from '@/store/ranking';
 
 /**
- * 通过 HTTP 获取 repositories 并更新
- * Github 接口使用 HTTP2 协议，无并发限制
+ * Fetch repositories via HTTP and update the store
+ * Github API uses HTTP2, so there's no concurrency limit
  *
- * @param {Array} storeRepositories
- * @returns
+ * @param {Array} storeRepositories - Repositories in the store
+ * @returns {Promise<void>}
  */
 async function handlerRsolveRepositories(storeRepositories) {
   const PAGE_SIZE = 100;
@@ -59,31 +59,31 @@ async function handlerRsolveRepositories(storeRepositories) {
 export const useRepositoryStore = defineStore('repository', {
   state: () => ({
     /**
-     * 所有 repositories
+     * All repositories
      */
     all: [],
     /**
-     * 选中的 repository id
+     * Selected repository ID
      */
     selectedId: null,
     /**
-     * repositories 过滤内容
+     * Filter text for repositories
      */
     filterText: '',
     /**
-     * 是否正在 HTTP 请求 repositories
+     * Whether repositories are being fetched via HTTP
      */
     loading: true,
     /**
-     * repositories 排序
-     * time 或 star
+     * Sorting type for repositories
+     * either by time or star count
      */
     sortType: REPO_SORT_TYPE.time.value,
   }),
 
   getters: {
     /**
-     * 当前条件下的 repositories
+     * Repositories filtered by current conditions
      */
     filteredRepositories: (state) => {
       let repositoriesTmp = [];
@@ -92,20 +92,8 @@ export const useRepositoryStore = defineStore('repository', {
 
       if (tagStore.tagSrc === TAG_SRC.self) {
         if (!tagStore.selectedTag) {
-          /**
-           * 当前未选中 tag
-           * 展示所有 repositories
-           * 不可直接使用 state.all
-           * 下文的排序处理会对 repositoriesTmp 进行变更
-           * 变更会触发 tag 分析
-           * 导致 tag 数据累加（错误）
-           */
           repositoriesTmp = [...state.all];
         } else if (tagStore.selectedTagType === TAG_TYPE.topic) {
-          /**
-           * 当前选中的 tag 属于 Topics
-           * 从 topicMap 找到 tag 及其对应的 repositories id
-           */
           const repositoryIds = tagStore.topicMap[tagStore.selectedTag];
           if (repositoryIds) {
             repositoriesTmp = state.all.filter((repository) =>
@@ -113,10 +101,6 @@ export const useRepositoryStore = defineStore('repository', {
             );
           }
         } else if (tagStore.selectedTagType === TAG_TYPE.language) {
-          /**
-           * 当前选中的 tag 属于 Languages
-           * 从 languageMap 找到 tag 及其对应的 repositories id
-           */
           const repositoryIds = tagStore.languageMap[tagStore.selectedTag];
           if (repositoryIds) {
             repositoriesTmp = state.all.filter((repository) =>
@@ -134,9 +118,6 @@ export const useRepositoryStore = defineStore('repository', {
         }
       }
 
-      /**
-       * 过滤对当前展示的 repositories
-       */
       if (state.filterText) {
         const filterText = state.filterText.toLowerCase();
         repositoriesTmp = repositoriesTmp.filter(
@@ -147,11 +128,6 @@ export const useRepositoryStore = defineStore('repository', {
         );
       }
 
-      /**
-       * 根据当前排序类型对当前展示的 repositories 排序
-       * repositories 默认已经按 star 时间排序
-       * 只需处理按 star 数量排序
-       */
       if (
         tagStore.tagSrc === TAG_SRC.self &&
         repositoriesTmp.length > 0 &&
@@ -164,7 +140,7 @@ export const useRepositoryStore = defineStore('repository', {
     },
 
     /**
-     * 当前选中的 repository
+     * Currently selected repository
      */
     selectedRepository: (state) => {
       const rankingStore = useRankingStore();
@@ -177,8 +153,7 @@ export const useRepositoryStore = defineStore('repository', {
 
   actions: {
     /**
-     * 获取 repositories
-     * LocalStorage 或 HTTP
+     * Fetch repositories from LocalStorage or HTTP
      */
     async resolveRepositories() {
       this.loading = true;
@@ -189,7 +164,6 @@ export const useRepositoryStore = defineStore('repository', {
         this.all = localRepositories;
       }
 
-      // 开发环境默认不通过 HTTP 更新 repositories
       if (!import.meta.env.DEV) {
         await handlerRsolveRepositories(this.all);
         localStorage.setItem(STARRED_REPOS, JSON.stringify(this.all));

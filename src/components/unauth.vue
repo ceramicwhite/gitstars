@@ -17,7 +17,7 @@
           target="_self"
         >
           <svg-icon name="github" class="mr-2 text-xl" />
-          <span>GitHub APP 授权登录</span>
+          <span>GitHub App Authorization Login</span>
         </a>
       </div>
     </div>

@@ -2,53 +2,110 @@
 
 <div align="center">
 
-简体中文 / [English](./README-EN.md)
-
-Github Stars 存储库管理器
+Github Stars Repositories Manager
 
 </div>
 
-## 🎯 背景
+## 🎯 Background
 
-Github 作为开发者的第一社交平台，拥有数不胜数的优秀开源项目，给工作和学习带来巨大方便，遇到自己需要或是喜爱的项目只需点击 Star 便可收入囊中。
+As the first social platform for developers, Github has countless excellent open source projects, which brings great convenience to work and study. When you encounter a project you need or like, just click Star to get it.
 
-Star is easy，可随着 Starred Repositories 增长，在需要使用到某个项目时难免记不清叫什么，而 Github 又只提供简单的搜索，找到目标 Starred Repository 竟也成了件小小的麻烦事。
+Star is easy, but as the number of Starred Repositories grows, it is inevitable that you can’t remember the name of a certain project when you need to use it, and Github only provides a simple search, so finding the target Starred Repository has become a little troublesome.
 
-所以拥有自己的 Github Stars Repositories Manager 也算是开发者的必备需求。
+Therefore, having your own Github Stars Repositories Manager is also a must-have for developers. 💡
 
-Gitstars 由此诞生 💡
+## 👀 Discover good projects: Gitstars Ranking (2023-09-09)
 
-## 👀 发现好项目：Gitstars Ranking（2023-09-09）
-
-<strong>Gitstars Ranking</strong>：帮助你发现 Github Stars 数量排名前 100 的好项目，支持各种编程语言分类，每日更新。
+<strong>Gitstars Ranking</strong>: Helps you discover the top 100 good projects with the number of Github Stars. It supports various programming language categories and is updated daily.
 
 ![](public/example-github-ranking.png)
 
-## 🚀 快速找到自己 Star 的仓库：Your Stars
+## 🚀 Quickly find your Star’s warehouse: Your Stars
 
-<strong>Your Stars</strong>：整理你的 Stars 仓库，根据 Topics 和 Language 进行分类，帮助你快速找到目标项目。
+<strong>Your Stars</strong>: Organize your Stars warehouse and classify it according to Topics and Language to help you quickly find target projects.
 
 ![](public/example-your-stars.png)
 
-## 👻 其它特性
+## 👻 Other features
 
-- <strong>README.md 预览</strong>：无需跳转到 Github 查看 README.md，在 Gitstars 即可查看。
-- <strong>链接直达</strong>：Github 仓库、项目 Webiste；
+- <strong>README.md preview</strong>: No need to jump to Github to view README.md, you can view it on Gitstars;
+- <strong>Direct link</strong>: Github warehouse, project website;
 
-## 📖 说明
+## 📖 illustrate
 
-### Topics：仓库的标签集
+### Topics: Warehouse label set
 
-标签集由 Repository 作者定义，一般都是与 Repository 相关的关键词，大多以英文为主。
+The tag set is defined by the Repository author and is generally keywords related to the Repository, mostly in English.
 
 ![](public/example-topics.png)
 
-### Language：仓库的主编程语言
+### Language: The main programming language of the warehouse
 
-Github 会统计分析 Repository 的文件，确定 Repository 的主编程语言。
+Github will statistically analyze the files of the Repository and determine the main programming language of the Repository.
 
 ![](public/example-languages.png)
 
-## 🤖 Vercel 部署
+## 🤖 Vercel deployment
 
-[WIKI Vercel 部署](https://github.com/cfour-hi/gitstars/wiki/Vercel-%E9%83%A8%E7%BD%B2)
+## Fork the Project
+
+![image](https://github.com/cfour-hi/gitstars/assets/8335856/2550b86b-8469-45d0-9b4e-d8f91cc680d1)
+
+## Create a Github OAuth App
+
+Go to Settings - Developer Settings - OAuth Apps.
+
+![No OAuth application](https://github.com/cfour-hi/gitstars/assets/8335856/889537d1-ae6b-481a-b054-8802df9182e1)
+
+Click the "Register a new application" button to create an app.
+
+![Register a new OAuth application](https://github.com/cfour-hi/gitstars/assets/8335856/64f37cca-6055-4d67-8a81-84159d1a9f8a)
+
+Think of a name for your Vercel project first. In the example above, the project name is `gitstars-cfour-hi`, and the final Vercel project access URL will be [https://gitstars-cfour-hi.vercel.app](https://gitstars-cfour-hi.vercel.app).
+
+Enter the access URL in both the Homepage URL and the Authorization callback URL fields.
+
+After creation, the app settings page will open.
+
+![Mivarxed](https://github.com/cfour-hi/gitstars/assets/8335856/6de209af-663a-4231-8069-54ce65995f71)
+
+The app settings page will display the Client ID, which will be added to the Vercel project environment variables later.
+
+Click the "Generate a new client secret" button to add a new secret key.
+
+![Qitstars](https://github.com/cfour-hi/gitstars/assets/8335856/64a87538-8754-4063-bf94-d17296afb370)
+
+Note: The secret key will be shown only once, so make sure to save it.
+
+Similarly, the secret key will also be added to the Vercel project environment variables later.
+
+## Create a Vercel Project
+
+![Let's build something new](https://github.com/cfour-hi/gitstars/assets/8335856/680c557e-5936-4038-9eb2-9ad651c7ba7a)
+
+After adding your Github account, all Github repositories will be displayed.
+
+Find `gitstars`, and click the "Import" button to enter the Configure Project page.
+
+![Configure Project](https://github.com/cfour-hi/gitstars/assets/8335856/35feb006-61ff-4ea7-9cb6-184e475be143)
+
+Enter the Vercel project name you thought of earlier in the Project Name field.
+
+Add two environment variables:
+
+1. VITE_GITSTARS_CLIENT_ID
+2. VITE_GITSTARS_CLIENT_SECRET
+
+After configuration, click the "Deploy" button at the bottom to start the deployment.
+
+Wait a moment, and upon successful deployment, the following content will appear.
+
+![Congratulations!](https://github.com/cfour-hi/gitstars/assets/8335856/cd930692-dccf-4286-8c5c-c35c316c21f1)
+
+Click the "Continue to Dashboard" button in the top right corner to enter the Vercel project details page.
+
+<img width="632" alt="gitstars-cfour-hi" src="https://github.com/cfour-hi/gitstars/assets/8335856/f659cf91-eeaa-4c11-9661-69c08e37f386">
+
+Open [https://gitstars-cfour-hi.vercel.app](https://gitstars-cfour-hi.vercel.app)
+
+<img width="1552" alt="Pasted Graphic 22" src="https://github.com/cfour-hi/gitstars/assets/8335856/e015b9cb-08f5-4594-8c2f-ffc61ad50409">

@@ -22,7 +22,7 @@ httpRequestGithub.interceptors.request.use((config) => {
 httpRequestGithub.interceptors.response.use(
   (res) => res.data,
   (err) => {
-    // access_token 失效
+    // access_token invalid
     if (err.response.status === 401) {
       localStorage.clear();
       location.reload();

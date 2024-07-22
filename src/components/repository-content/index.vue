@@ -27,7 +27,7 @@
         v-if="!selectedRepository"
         class="flex items-center justify-center text-sm"
       >
-        <svg-icon name="hand-left" class="mr-1 text-base" />点击左侧仓库查看
+        <svg-icon name="hand-left" class="mr-1 text-base" />Click on the repository on the left to view
       </p>
       <svg-icon v-show="loading" name="loading" class="animate-spin text-2xl" />
     </div>
@@ -59,7 +59,7 @@ watchEffect(async () => {
   readme.value = '';
   loading.value = true;
 
-  // 暂存 repository id
+  // Temporarily store repository id
   const { id } = selectedRepository.value;
 
   const { content, html_url } = await getRepositoryReadme({
@@ -70,36 +70,11 @@ watchEffect(async () => {
     decodeURIComponent(escape(atob(content))),
   );
 
-  /**
-   * 接口异步响应需要时间
-   * 此时 selectedRepository 可能已变更
-   */
+  // Async response time, selectedRepository may have changed
   if (id !== selectedRepository.value.id) return;
   loading.value = false;
 
-  /**
-   * https://github.com/coder/code-server/blob/main/docs/README.md
-   * =>
-   * https://github.com/coder/code-server/blob/main/docs/
-   */
   const urlPrefix = html_url.slice(0, -9);
-
-  /**
-   * 1. <img src="https://github.com/path/to/a.png" />
-   * 2. <img src="./path/to/a.png" />
-   * 3. <img src="path/to/a.png" />
-   * 4. <img src=".filename/path/to/a.png" />
-   * 5. <img src="/path/to/a.png" />
-   */
-
-  /**
-   * 1. <a href="https://github.com/path/to/a.png" />
-   * 2. <a href="./path/to/a.png" />
-   * 3. <a href="path/to/a.png" />
-   * 4. <a href=".filename/path/to/a.png" />
-   * 5. <a href="/path/to/a.png" />
-   * 6. <a href="#id-to-content" />
-   */
 
   readme.value = result
     .replace(/<[^>]+href="([^"]+)(?=")/g, (match, p1) => {
